@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000;
 const connectDB = require('./config/db');
 
 //TEST
+//TEST2
 
 connectDB();
 
