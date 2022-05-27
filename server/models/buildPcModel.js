@@ -39,18 +39,8 @@ const buildPcSchema = mongoose.Schema(
     OperatingSystem: {
       type: String,
     },
-    OperatingSystem: {
-      type: String,
-    },
-    monitor: {
-      type: String,
-    },
-    Keyboard: {
-      type: String,
-    },
-    mouse: {
-      type: String,
-    },
+   
+    
   },
   {
     timestamps: true,
