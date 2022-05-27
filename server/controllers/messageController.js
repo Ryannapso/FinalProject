@@ -1,6 +1,6 @@
 const Message = require('../models/messageModel');
 
-// dec Get messages
+// Get messages
 // route GET /messages
 const getMessage = async (req, res) => {
   const messages = await Message.find();
