@@ -1,15 +1,15 @@
 const Message = require('../models/messageModel');
 
-// @dec Get messages
-// @route GET /messages
+// dec Get messages
+// route GET /messages
 const getMessage = async (req, res) => {
   const messages = await Message.find();
 
   res.status(200).json(messages);
 };
 
-// @dec Set messages
-// @route POST /messages
+// Set messages
+// route POST /messages
 const setMessage = async (req, res) => {
   if(!req.body.title) {
     res.status(400)
@@ -29,8 +29,8 @@ const setMessage = async (req, res) => {
   res.status(200).json(message);
 };
 
-// @dec Update messages
-// @route PUT /messages/:id
+// Update messages
+// route PUT /messages/:id
 const updateMessage = async (req, res) => {
   const message = await Message.findById(req.params.id);
 
@@ -44,8 +44,8 @@ const updateMessage = async (req, res) => {
   res.status(200).json(updatedMessage);
 };
 
-// @dec Delete messages
-// @route DELETE /messages/:id
+// Delete messages
+// route DELETE /messages/:id
 const deleteMessage = async (req, res) => {
   const message = await Message.findById(req.params.id);
 
