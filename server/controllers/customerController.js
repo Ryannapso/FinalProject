@@ -3,9 +3,9 @@ const Customer = require("../models/customerModel");
 // Get Customers
 // route GET /Customers
 const getCustomer = async (req, res) => {
-  const Customers = await Customer.find();
+  const customers = await Customer.find();
 
-  res.status(200).json(Customers);
+  res.status(200).json(customers);
 };
 
 // Set Customers
@@ -25,7 +25,7 @@ const setCustomer = async (req, res) => {
     throw new Error("Please add a Phone Number.");
   }
 
-  const Customer = await Customer.create({
+  const customer = await Customer.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phoneNumber1: req.body.phoneNumber1,
@@ -33,15 +33,15 @@ const setCustomer = async (req, res) => {
     address: req.body.address,
   });
 
-  res.status(200).json(Customer);
+  res.status(200).json(customer);
 };
 
 // Update Customers
 // route PUT /Customers/:id
 const updateCustomer = async (req, res) => {
-  const Customer = await Customer.findById(req.params.id);
+  const customer = await Customer.findById(req.params.id);
 
-  if (!Customer) {
+  if (!customer) {
     res.status(400);
     throw new Error("Customer not found");
   }
@@ -57,9 +57,9 @@ const updateCustomer = async (req, res) => {
 // Delete Customers
 // route DELETE /Customers/:id
 const deleteCustomer = async (req, res) => {
-  const Customer = await Customer.findById(req.params.id);
+  const customer = await Customer.findById(req.params.id);
 
-  if (!Customer) {
+  if (!customer) {
     res.status(400);
     throw new Error("Customer not found");
   }
