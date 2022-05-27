@@ -1,7 +1,4 @@
 const Ticket = require('../models/ticketModel');
-const Customer = require('../models/customerModel');
-const User = require('../models/userModel');
-
 // Get tickets
 // route GET /tickets
 const getTicket = async (req, res) => {
