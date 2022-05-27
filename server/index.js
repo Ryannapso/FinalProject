@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/messages', require('./routes/messageRoutes'));
+app.use('/customers', require('./routes/customerRoutes'));
 
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
