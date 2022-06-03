@@ -1,37 +1,6 @@
 const User = require("../models/userModel");
-
-// Get Users
-// route GET /User
-const getUser = async (req, res) => {
-  const users = await User.find();
-
-  res.status(200).json(users);
-};
-
-// Set User
-// route POST /user
-const setUser = async (req, res) => {
-  if (!req.body.userName) {
-    res.status(400);
-    throw new Error("Must out User name.");
-  }
-
-  if (!req.body.password) {
-    res.status(400);
-    throw new Error("Must set a password.");
-  }
-
-  const user = await User.create({
-    userName: req.body.userName,
-    password: req.body.password,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    phoneNumber1: req.body.phoneNumber1,
-    address: req.body.address,
-  });
-
-  res.status(200).json(user);
-};
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 // Update users
 // route PUT /User/:id
@@ -64,9 +33,91 @@ const deleteUser = async (req, res) => {
   res.status(200).json({ _id: req.params.id });
 };
 
+// Register user
+// route POST /users/register
+const registerUser = async (req, res) => {
+
+  const {username, password, firstName, lastName, phoneNumber1, address } = req.body;
+
+  if(!username || !password) {
+    res.status(400)
+  }
+
+  // Check if user exists
+  const userExists = await User.findOne({username})
+
+  if(userExists) {
+    res.status(400);
+    res.json("User already exists");
+  }
+
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  // Create User
+  const user = await User.create({
+    username,
+    password: hashedPassword,
+    firstName,
+    lastName,
+    phoneNumber1,
+    address
+  });
+
+  if(user) {
+    res.status(201).json({
+      _id: user.id,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phoneNumber1: user.phoneNumber1,
+      address: user.address,
+      token: generateToken(user._id)
+    })
+  } else {
+    res.status(400);
+  }
+};
+
+const loginUser = async (req, res) => {
+  const {username, password} = req.body;
+
+  // Check for username
+  const user = await User.findOne({username});
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res.json({
+      _id: user.id,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phoneNumber1: user.phoneNumber1,
+      address: user.address,
+      token: generateToken(user._id)
+    })
+  } else {
+    res.status(400);
+    res.json("test");
+  }
+};
+
+// Get user data
+// route GET /users/user
+const getUser = async (req, res) => {
+  res.json("testing");
+}
+
+// Generate Token
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '30d'
+  });
+};
+
 module.exports = {
   getUser,
-  setUser,
   updateUser,
   deleteUser,
+  registerUser,
+  loginUser
 };

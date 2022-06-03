@@ -24,6 +24,7 @@ const setMessage = async (req, res) => {
   const message = await Message.create({
     title: req.body.title,
     message: req.body.message,
+    priority: req.body.priority
   });
 
   res.status(200).json(message);
