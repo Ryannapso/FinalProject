@@ -97,15 +97,15 @@ const loginUser = async (req, res) => {
     })
   } else {
     res.status(400);
-    res.json("test");
+    res.json("Invalid Credentials");
   }
 };
 
 // Get user data
 // route GET /users/user
 const getUser = async (req, res) => {
-  res.json("testing");
-}
+  res.json({ message: 'User data display' });
+};
 
 // Generate Token
 const generateToken = (id) => {
