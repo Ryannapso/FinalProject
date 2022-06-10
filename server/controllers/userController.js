@@ -104,7 +104,14 @@ const loginUser = async (req, res) => {
 // Get user data
 // route GET /users/user
 const getUser = async (req, res) => {
-  res.json({ message: 'User data display' });
+  const { _id, username, firstName, lastName } = await User.findById(req.user.id);
+
+  res.status(200).json({
+    id: _id,
+    username,
+    firstName,
+    lastName
+  })
 };
 
 // Generate Token
