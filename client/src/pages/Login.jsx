@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { FaSignInAlt } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
-  const { email, password } = formData;
+  const { username, password } = formData;
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -19,6 +21,7 @@ function Login() {
   //need to read what it does
   const onSubmit = (e) => {
     e.preventDefault();
+    navigate("/");
   };
   return (
     <>
@@ -26,7 +29,6 @@ function Login() {
         <h1>
           <FaSignInAlt /> Login
         </h1>
-        <p> Please create an account</p>
       </section>
 
       <section className="form">
@@ -35,10 +37,10 @@ function Login() {
             <input
               type="text"
               className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              placeholder="Enter your email"
+              id="username"
+              name="username"
+              value={username}
+              placeholder="Enter your username"
               onChange={onChange}
             />
           </div>
