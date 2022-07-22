@@ -7,7 +7,7 @@ const getTicket = async (req, res) => {
   res.status(200).json(tickets);
 };
 
-// Set tickets
+// Set ticketsd
 // route POST /tickets
 const setTicket = async (req, res) => {
   if(!req.body.deviceType) {

@@ -3,6 +3,7 @@ import Header from "./components/Header.jsx";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import MessageList from "./pages/MessageList"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/messages" element={<MessageList />} />
           </Routes>
         </div>
       </Router>

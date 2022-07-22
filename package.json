@@ -13,7 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+<<<<<<< HEAD
     "concurrently": "^7.3.0",
+=======
+    "cors": "^2.8.5",
+>>>>>>> d4b08a2c92e51bab919f44bf9c844717d0f06047
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
